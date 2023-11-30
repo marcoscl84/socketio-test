@@ -15,6 +15,10 @@ io.on("connection", (socket) => {
         console.log(data);
         socket.emit("resultado", data + " - Guia do Programador");
     })
+
+    socket.on("disconnect", () => {
+        console.log("desconectou: " + socket.id)
+    })
 })
 
 http.listen(3000, () => {
