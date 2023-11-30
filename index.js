@@ -11,13 +11,13 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
 
-    socket.on("inputText", (data) => {
-        console.log(data);
-        socket.emit("resultado", data + " - Guia do Programador");
-    })
-
     socket.on("disconnect", () => {
         console.log("desconectou: " + socket.id)
+    })
+
+    socket.on("msg", (data) => {
+        socket.emit("showMsg", data);
+        console.log(data);
     })
 })
 

@@ -6,10 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="text" name="" id="inputText" onInput="enviar()">
-    <button>Enviar</button>
-    <hr>
-    <p id="resultado"></p>
+    <h1>Guia Chat</h1>
+    <div id="chat">
+
+    </div>
+    <br>
+    <input type="text" name="" id="msg"><br>
+    <input type="text" name="" id="username" placeholder="Seu nome de usuário...">
+    <br>
+    <button onclick="enviar()">Enviar</button>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
@@ -19,17 +24,24 @@
         console.log("Desconectado")
     })
 
-    socket.emit("evento", {nome: "Alemão"});
-
-    socket.on("resultado", (data) => {
-        var p = document.getElementById("resultado");
-        p.innerHTML = data;
+    socket.on("showMsg", (data) => {
+        console.log(data);
+        var chat = document.getElementById("chat");
+        var p = document.createElement("p");
+        p.innerHTML = data.username + ": " + data.msg;
+        chat.append(p);
     })
 
     function enviar(){
-        var input = document.getElementById("inputText");
-        socket.emit("inputText", input.value)
+        var msgField = document.getElementById("msg");
+        var userNameField = document.getElementById("username");
+
+        var msg = msgField.value;
+        var username = userNameField.value;
+
+        socket.emit("msg", {msg: msg, username: username})
     }
+
 </script>
 
 </html>
