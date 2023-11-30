@@ -16,7 +16,8 @@ io.on("connection", (socket) => {
     })
 
     socket.on("msg", (data) => {
-        socket.emit("showMsg", data);
+        // socket.broadcast.emit("showMsg", data); // envia para todos, menos para o emissor
+        io.emit("showMsg", data); // envia para todos, INCLUSIVE para o emissor
         console.log(data);
     })
 })
