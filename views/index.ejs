@@ -8,6 +8,8 @@
 <body>
     <input type="text" name="" id="inputText">
     <button onclick="enviar()">Enviar</button>
+    <hr>
+    <p id="resultado"></p>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
@@ -15,6 +17,11 @@
     var socket = io("http://localhost:3000")
 
     socket.emit("evento", {nome: "Alemão"});
+
+    socket.on("resultado", (data) => {
+        var p = document.getElementById("resultado");
+        p.innerHTML = data;
+    })
 
     function enviar(){
         var input = document.getElementById("inputText");

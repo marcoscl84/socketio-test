@@ -13,6 +13,7 @@ io.on("connection", (socket) => {
 
     socket.on("inputText", (data) => {
         console.log(data);
+        socket.emit("resultado", data + " - Guia do Programador");
     })
 })
 
