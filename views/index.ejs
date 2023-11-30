@@ -6,6 +6,20 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>teste</h1>
+    <input type="text" name="" id="inputText">
+    <button onclick="enviar()">Enviar</button>
 </body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+<script>
+    var socket = io("http://localhost:3000")
+
+    socket.emit("evento", {nome: "Alemão"});
+
+    function enviar(){
+        var input = document.getElementById("inputText");
+        socket.emit("inputText", input.value)
+    }
+</script>
+
 </html>

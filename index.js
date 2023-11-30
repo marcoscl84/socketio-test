@@ -9,6 +9,13 @@ app.get("/", (req, res) => {
     res.render("index")
 })
 
+io.on("connection", (socket) => {
+
+    socket.on("inputText", (data) => {
+        console.log(data);
+    })
+})
+
 http.listen(3000, () => {
     console.log("App rodando.")
 })
